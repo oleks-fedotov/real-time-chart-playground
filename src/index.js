@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import timelineReducers from './components/TimelineChart/reducers';
+import movementsReducers from './components/MovementVisualizer/reducers';
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
@@ -14,7 +15,10 @@ import io from 'socket.io-client';
 let socket = io('http://localhost:3001');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'socket/');
 
-const reducers = combineReducers({timeline: timelineReducers});
+const reducers = combineReducers({
+    timeline: timelineReducers,
+    movements: movementsReducers
+});
 
 let store = applyMiddleware(socketIoMiddleware)(createStore)(reducers);
 

@@ -16,13 +16,14 @@ io.on('connection', function (socket) {
 });
 
 setInterval(() => {
-    const newValue = Math.random() * 10;
-    console.log(newValue);
+    const x = Math.random() * 400;
+    const y = Math.random() * 400;
+
     io.emit('action', {
-        type: 'socket/timelineUpdate',
+        type: 'socket/movementUpdate',
         data: {
-            date: new Date(),
-            value: newValue
+            x,
+            y
         }
     });
-}, 1000);
+}, 5000);
